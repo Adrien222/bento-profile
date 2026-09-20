@@ -53,14 +53,17 @@ async function main() {
     const props = { profile, github };
     const body = render(props);
 
-    const canonical = `${profile.seo.canonical ?? 'https://www.adrienchretien.dev'}/`.replace(/\/+$/, '/');
+    // Le domaine fait autorite : une seule adresse canonique, meme si le
+    // deploiement reste joignable sur son URL .vercel.app.
+    const origin = profile.seo.canonical.replace(/\/+$/, '');
+    const canonical = `${origin}/`;
 
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: profile.name,
         email: `mailto:${profile.email}`,
-        image: canonical.replace(/\/$/, '') + profile.avatar,
+        image: origin + profile.avatar,
         jobTitle: 'Développeur full-stack & expert SEO',
         url: canonical,
         sameAs: profile.socials.map((social) => social.url),
@@ -88,7 +91,7 @@ async function main() {
     <meta property="og:title" content="${escape(profile.seo.title)}">
     <meta property="og:description" content="${escape(profile.seo.description)}">
     <meta property="og:url" content="${canonical}">
-    <meta property="og:image" content="${canonical.replace(/\/$/, '')}${profile.seo.image}">
+    <meta property="og:image" content="${origin}${profile.seo.image}">
     <meta name="twitter:card" content="summary_large_image">
 
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>

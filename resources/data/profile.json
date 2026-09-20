@@ -166,6 +166,7 @@
     "seo": {
         "title": "Adrien Chretien · Développeur full-stack & expert SEO",
         "description": "Développeur full-stack et référenceur. Je construis des sites qui se chargent vite et qui se trouvent : Laravel, React, SEO technique et Core Web Vitals tenus dès le code.",
-        "image": "/img/adrien.jpg"
+        "image": "/img/adrien.jpg",
+        "canonical": "https://www.adrienchretien.dev"
     }
 }
