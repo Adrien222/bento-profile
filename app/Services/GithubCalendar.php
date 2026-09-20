@@ -30,11 +30,36 @@ class GithubCalendar
      */
     public function forLogin(string $login, int $cacheHours = 3): ?array
     {
+        // En serverless, le cache ne survit pas d'une invocation à l'autre :
+        // l'instantané figé au build évite d'interroger GitHub à chaque
+        // démarrage à froid. Voir scripts/fetch-github.mjs.
+        if ($snapshot = $this->snapshot()) {
+            return $snapshot;
+        }
+
         return Cache::remember(
             "github-calendar:{$login}",
             now()->addHours(max(1, $cacheHours)),
             fn () => $this->fetch($login),
         );
+    }
+
+    /**
+     * L'instantané produit au build, s'il existe.
+     *
+     * @return array{days: list<array{date: string, level: int, count: int}>, total: int, start: string, end: string, repos: int|null, followers: int|null}|null
+     */
+    private function snapshot(): ?array
+    {
+        $path = resource_path('data/github-calendar.json');
+
+        if (! is_readable($path)) {
+            return null;
+        }
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+
+        return is_array($decoded) && ! empty($decoded['days']) ? $decoded : null;
     }
 
     /**
