@@ -1,6 +1,12 @@
 @php
     $seo = config('profile.seo');
 
+    // Le domaine canonique vient d'APP_URL, jamais de l'hôte de la requête :
+    // le déploiement reste joignable sur son URL .vercel.app, et deux hôtes
+    // servant la même page avec chacun son propre canonique, c'est du contenu
+    // dupliqué. Une seule adresse fait autorité.
+    $canonical = rtrim(config('app.url'), '/').'/';
+
     // Construit ici plutôt que dans @json(...) : Blade ne sait pas parser un
     // tableau multiligne à l'intérieur d'une directive.
     $jsonLd = [
@@ -10,7 +16,7 @@
         'email' => 'mailto:'.config('profile.email'),
         'image' => url(config('profile.avatar')),
         'jobTitle' => 'Développeur full-stack & expert SEO',
-        'url' => url('/'),
+        'url' => $canonical,
         'sameAs' => array_column(config('profile.socials'), 'url'),
         'worksFor' => [
             '@type' => 'Organization',
@@ -28,12 +34,12 @@
     {{-- Servi côté serveur : la page reste indexable sans exécution JavaScript. --}}
     <title inertia>{{ $seo['title'] }}</title>
     <meta name="description" content="{{ $seo['description'] }}">
-    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="canonical" href="{{ $canonical }}">
 
     <meta property="og:type" content="profile">
     <meta property="og:title" content="{{ $seo['title'] }}">
     <meta property="og:description" content="{{ $seo['description'] }}">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:url" content="{{ $canonical }}">
     <meta property="og:image" content="{{ url($seo['image']) }}">
     <meta name="twitter:card" content="summary_large_image">
 
