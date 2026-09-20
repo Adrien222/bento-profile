@@ -40,24 +40,12 @@ export default function Profile({ profile, github }) {
 
                 <Marquee items={profile.marquee} />
 
-                {/* repères, puis l'agence directement en dessous */}
                 <section className="sec" style={{ marginTop: 56 }}>
                     <div className="bento">
                         <PhotoCard src={profile.avatar} alt={`Portrait d'${profile.name}`} />
                         <StatusCard status={profile.status} delay={0.08} />
                         <ClockCard timezone={profile.timezone} delay={0.16} />
                         <LocationCard location={profile.location} note={profile.location_note} delay={0.24} />
-
-                        <Panel
-                            tone="plain"
-                            href={profile.agency.url}
-                            eyebrow={profile.agency.eyebrow}
-                            title={profile.agency.name}
-                            description={profile.agency.description}
-                            stats={profile.agency.stats}
-                            cta={profile.agency.cta}
-                            delay={0.32}
-                        />
                     </div>
                 </section>
 

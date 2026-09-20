@@ -67,11 +67,6 @@ async function main() {
         jobTitle: 'Développeur full-stack & expert SEO',
         url: canonical,
         sameAs: profile.socials.map((social) => social.url),
-        worksFor: {
-            '@type': 'Organization',
-            name: profile.agency.name,
-            url: profile.agency.url,
-        },
     };
 
     const html = `<!DOCTYPE html>

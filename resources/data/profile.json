@@ -41,23 +41,6 @@
         "Schema.org",
         "AdonisJS"
     ],
-    "agency": {
-        "name": "atcode.fr",
-        "url": "https://atcode.fr",
-        "eyebrow": "Mon agence",
-        "description": "La structure derrière les projets : conception, développement, référencement et maintenance, du cadrage à la mise en production.",
-        "stats": [
-            {
-                "label": "Prestations",
-                "value": "Sites vitrines · Refonte · SEO · Logiciels sur mesure"
-            },
-            {
-                "label": "Basée en",
-                "value": "France · à distance"
-            }
-        ],
-        "cta": "Voir le studio"
-    },
     "expertise": {
         "eyebrow": "Double expertise",
         "title": "Développement\n+ SEO",

@@ -18,11 +18,6 @@
         'jobTitle' => 'Développeur full-stack & expert SEO',
         'url' => $canonical,
         'sameAs' => array_column(config('profile.socials'), 'url'),
-        'worksFor' => [
-            '@type' => 'Organization',
-            'name' => config('profile.agency.name'),
-            'url' => config('profile.agency.url'),
-        ],
     ];
 @endphp
 <!DOCTYPE html>
