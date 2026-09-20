@@ -1,6 +1,5 @@
 {
     "$schema": "https://openapi.vercel.sh/vercel.json",
-    "_comment": "L'image de build est une image Node : ni PHP ni composer n'y sont disponibles. Les dependances Composer sont installees par le runtime vercel-php au moment de construire la fonction, et l'instantane GitHub est produit en Node pour la meme raison.",
     "framework": null,
     "installCommand": "pnpm install --frozen-lockfile",
     "buildCommand": "node scripts/fetch-github.mjs && pnpm build",
