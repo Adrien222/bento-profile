@@ -172,15 +172,3 @@ export function SocialCard({ social, delay = 0 }) {
     );
 }
 
-export function SlotCard({ children, span = 'c2', delay = 0 }) {
-    return (
-        <Card span={span} className="slot" delay={delay}>
-            <p>
-                <span className="plus" aria-hidden="true">
-                    +
-                </span>
-                {children}
-            </p>
-        </Card>
-    );
-}

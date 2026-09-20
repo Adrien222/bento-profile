@@ -6,7 +6,6 @@ import {
     Panel,
     PhotoCard,
     ProjectCard,
-    SlotCard,
     SocialCard,
     StatusCard,
     VitalsCard,
@@ -70,9 +69,6 @@ export default function Profile({ profile, github }) {
                         {profile.projects.map((project, i) => (
                             <ProjectCard key={project.domain} project={project} delay={(i % 2) * 0.1} />
                         ))}
-                        <SlotCard delay={0.1}>
-                            Prochain projet : la grille en absorbe un de plus sans retouche
-                        </SlotCard>
                     </div>
                 </section>
 
