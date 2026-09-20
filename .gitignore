@@ -25,3 +25,6 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Regenere a chaque build par scripts/fetch-github.mjs
+/resources/data/github-calendar.json
