@@ -28,3 +28,7 @@ Thumbs.db
 
 # Regenere a chaque build par scripts/fetch-github.mjs
 /resources/data/github-calendar.json
+
+# Build statique
+/dist
+/.ssr

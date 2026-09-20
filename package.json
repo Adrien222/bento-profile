@@ -4,7 +4,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "build:static": "node scripts/fetch-github.mjs && node scripts/prerender.mjs"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

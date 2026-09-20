@@ -1,4 +1,3 @@
-import { Head } from '@inertiajs/react';
 import { useEffect } from 'react';
 import {
     ClockCard,
@@ -26,8 +25,6 @@ export default function Profile({ profile, github }) {
 
     return (
         <>
-            <Head title={profile.seo.title} />
-
             <Arcs />
             <SideTab status={profile.status} email={profile.email} />
 
