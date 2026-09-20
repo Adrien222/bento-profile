@@ -2,7 +2,8 @@ import { createInertiaApp } from '@inertiajs/react';
 import { createRoot } from 'react-dom/client';
 
 createInertiaApp({
-    title: (title) => (title ? `${title} · Bento` : 'Bento'),
+    // Le titre complet vit dans config/profile.php, pas de suffixe ajouté ici.
+    title: (title) => title,
 
     resolve: (name) => {
         const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true });
@@ -15,6 +16,6 @@ createInertiaApp({
     },
 
     progress: {
-        color: '#4f46e5',
+        color: '#98A4FF',
     },
 });

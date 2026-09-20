@@ -1,119 +1,112 @@
 import { Head } from '@inertiajs/react';
-import Card from '../Components/Card';
-import LinkButton from '../Components/LinkButton';
+import { useEffect } from 'react';
+import {
+    ClockCard,
+    LeverCard,
+    LocationCard,
+    Panel,
+    PhotoCard,
+    ProjectCard,
+    SlotCard,
+    SocialCard,
+    StatusCard,
+    VitalsCard,
+} from '../Components/Cards';
+import { Arcs, Marquee, SectionTitle, SideTab, ThemeToggle } from '../Components/Chrome';
+import GithubCard from '../Components/GithubCard';
+import Hero from '../Components/Hero';
 
-const ACCENTS = {
-    neutral: 'bg-neutral-900 text-white dark:bg-neutral-700',
-    blue: 'bg-blue-600 text-white',
-    red: 'bg-red-600 text-white',
-};
+export default function Profile({ profile, github }) {
+    // Déclenche la montée des lignes du hero une fois la page peinte.
+    useEffect(() => {
+        const id = requestAnimationFrame(() => document.documentElement.classList.add('loaded'));
 
-function Avatar({ name, src }) {
-    if (src) {
-        return <img src={src} alt="" className="size-20 rounded-full object-cover" />;
-    }
+        return () => cancelAnimationFrame(id);
+    }, []);
 
-    // Repli sur l'initiale tant qu'aucune image n'est fournie.
-    return (
-        <div className="flex size-20 items-center justify-center rounded-full bg-neutral-200 text-2xl font-semibold text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
-            {name.charAt(0)}
-        </div>
-    );
-}
-
-function SocialCard({ social }) {
-    return (
-        <Card className="flex flex-col justify-between gap-4">
-            <div className="flex items-center gap-3">
-                <span
-                    className={`flex size-9 shrink-0 items-center justify-center rounded-xl text-xs font-bold ${
-                        ACCENTS[social.accent] ?? ACCENTS.neutral
-                    }`}
-                >
-                    {social.label.charAt(0)}
-                </span>
-                <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold">{social.label}</p>
-                    <p className="truncate text-xs text-neutral-500">{social.handle}</p>
-                </div>
-            </div>
-            <LinkButton href={social.url}>{social.cta}</LinkButton>
-        </Card>
-    );
-}
-
-function ProjectCard({ project }) {
-    return (
-        <Card span="md:col-span-2" className="flex flex-col gap-4">
-            <span className="w-fit rounded-md bg-orange-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-orange-700 dark:bg-orange-500/15 dark:text-orange-300">
-                {project.tag}
-            </span>
-
-            <div className="flex flex-wrap items-center justify-between gap-3">
-                <div>
-                    <p className="font-semibold">{project.name}</p>
-                    <p className="text-xs text-neutral-500">{project.domain}</p>
-                </div>
-                <LinkButton href={project.url}>{project.cta}</LinkButton>
-            </div>
-
-            <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-                {project.description}
-            </p>
-        </Card>
-    );
-}
-
-export default function Profile({ profile }) {
     return (
         <>
-            <Head title={profile.name} />
+            <Head title={profile.seo.title} />
 
-            <main className="mx-auto max-w-5xl px-4 py-10">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-                    {/* Carte identité : occupe toute la hauteur sur grand écran. */}
-                    <Card span="md:col-span-2 md:row-span-2" className="flex flex-col gap-5">
-                        <Avatar name={profile.name} src={profile.avatar} />
+            <Arcs />
+            <SideTab status={profile.status} email={profile.email} />
 
-                        <div>
-                            <h1 className="text-2xl font-bold">{profile.name}</h1>
-                            <p className="text-sm text-neutral-500">{profile.headline}</p>
-                        </div>
-
-                        <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-                            {profile.bio}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2">
-                            {[profile.location, profile.headline].filter(Boolean).map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="rounded-full border border-neutral-200 px-3 py-1 text-xs text-neutral-600 dark:border-neutral-700 dark:text-neutral-400"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-
-                        <div className="mt-auto border-t border-neutral-200 pt-4 dark:border-neutral-800">
-                            <a
-                                href={`mailto:${profile.email}`}
-                                className="text-sm text-neutral-600 underline-offset-4 hover:underline dark:text-neutral-400"
-                            >
-                                {profile.email}
-                            </a>
-                        </div>
-                    </Card>
-
-                    {profile.socials.map((social) => (
-                        <SocialCard key={social.label} social={social} />
-                    ))}
-
-                    {profile.projects.map((project) => (
-                        <ProjectCard key={project.name} project={project} />
-                    ))}
+            <div className="wrap">
+                <div className="topbar">
+                    <span>
+                        <b>{profile.name}</b> <span className="sep">/</span> profil
+                    </span>
+                    <ThemeToggle />
                 </div>
-            </main>
+
+                <Hero profile={profile} />
+
+                <Marquee items={profile.marquee} />
+
+                {/* repères, puis l'agence directement en dessous */}
+                <section className="sec" style={{ marginTop: 56 }}>
+                    <div className="bento">
+                        <PhotoCard src={profile.avatar} alt={`Portrait d'${profile.name}`} />
+                        <StatusCard status={profile.status} delay={0.08} />
+                        <ClockCard timezone={profile.timezone} delay={0.16} />
+                        <LocationCard location={profile.location} note={profile.location_note} delay={0.24} />
+
+                        <Panel
+                            tone="plain"
+                            href={profile.agency.url}
+                            eyebrow={profile.agency.eyebrow}
+                            title={profile.agency.name}
+                            description={profile.agency.description}
+                            stats={profile.agency.stats}
+                            cta={profile.agency.cta}
+                            delay={0.32}
+                        />
+                    </div>
+                </section>
+
+                <section className="sec">
+                    <SectionTitle eyebrow={profile.expertise.eyebrow} title={profile.expertise.title} />
+                    <div className="bento">
+                        <Panel
+                            tone="cobalt"
+                            eyebrow={profile.expertise.panel_eyebrow}
+                            title={profile.expertise.panel_title}
+                            description={profile.expertise.panel_description}
+                            stats={profile.expertise.stats}
+                        />
+                        <LeverCard levers={profile.levers} delay={0.1} />
+                        <VitalsCard vitals={profile.vitals} delay={0.18} />
+                    </div>
+                </section>
+
+                <section className="sec">
+                    <SectionTitle eyebrow="Historique" title="Projets" count={profile.projects.length} />
+                    <div className="bento">
+                        {profile.projects.map((project, i) => (
+                            <ProjectCard key={project.domain} project={project} delay={(i % 2) * 0.1} />
+                        ))}
+                        <SlotCard delay={0.1}>
+                            Prochain projet : la grille en absorbe un de plus sans retouche
+                        </SlotCard>
+                    </div>
+                </section>
+
+                <section className="sec">
+                    <SectionTitle eyebrow="Me suivre" title="Réseaux" />
+                    <div className="bento">
+                        {profile.socials.map((social, i) => (
+                            <SocialCard key={social.label} social={social} delay={i * 0.08} />
+                        ))}
+                        <GithubCard
+                            login={profile.github.login}
+                            name={profile.name}
+                            avatar={profile.avatar}
+                            github={github}
+                            delay={0.16}
+                        />
+                    </div>
+                </section>
+            </div>
         </>
     );
 }

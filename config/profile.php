@@ -6,49 +6,147 @@
 |--------------------------------------------------------------------------
 |
 | Toute la page se pilote depuis ce fichier : modifie les valeurs ici et
-| la grille se met à jour. Aucune base de données n'est nécessaire tant
+| la page se met à jour. Aucune base de données n'est nécessaire tant
 | que le contenu reste statique.
 |
 */
 
 return [
 
-    'name' => 'Alexis',
-    'headline' => 'Full-Stack Dev',
-    'location' => 'Rouen, FR',
-    'avatar' => null, // ex. '/img/avatar.jpg'
+    'name' => 'Adrien Chretien',
+    'age' => 24,
+    'avatar' => '/img/adrien.jpg',
+    'location' => 'France',
+    'location_note' => 'Travail à distance, déplacements ponctuels.',
+    'timezone' => 'Europe/Paris',
+    'email' => 'adrien@atcode.fr',
 
-    'bio' => "Avec plus de 4 ans d'expérience en développement web, je conçois "
-        ."et développe des produits utiles, performants et élégants.",
-
-    'email' => 'hello@example.com',
-
-    // Cartes de liens sociaux. 'accent' pilote la couleur de la pastille.
-    'socials' => [
-        ['label' => 'GitHub',   'handle' => '@ShAd-x',   'url' => 'https://github.com/ShAd-x',   'cta' => 'Follow',    'accent' => 'neutral'],
-        ['label' => 'X',        'handle' => '@ShAd_x_x', 'url' => 'https://x.com/ShAd_x_x',      'cta' => 'Follow',    'accent' => 'neutral'],
-        ['label' => 'LinkedIn', 'handle' => 'Alexis',    'url' => 'https://linkedin.com',        'cta' => 'Connect',   'accent' => 'blue'],
-        ['label' => 'YouTube',  'handle' => '@ShAd_x_x', 'url' => 'https://youtube.com',         'cta' => 'Subscribe', 'accent' => 'red'],
+    // Les quatre lignes du hero. 'offset' décale la ligne vers la droite,
+    // 'align' la cale à droite, 'amp' lui donne le corps de l'esperluette.
+    'headline' => [
+        ['text' => 'Développeur'],
+        ['text' => 'full-stack', 'offset' => true],
+        ['text' => '&', 'amp' => true],
+        ['text' => 'expert SEO', 'align' => 'right'],
     ],
 
-    // Cartes projet, affichées en grand format.
+    'bio' => "Je construis des sites qui se chargent vite **et** qui se trouvent. "
+        ."Le développement et le référencement tenus par la même personne, c'est "
+        ."un arbitrage technique pris en connaissance de son effet sur le trafic, "
+        ."et pas une refonte six mois plus tard.",
+
+    'status' => [
+        'available' => true,
+        'label' => 'Disponible',
+        'note' => 'Ouvert aux missions freelance et aux projets produit.',
+    ],
+
+    // Bandeau défilant sous le hero.
+    'marquee' => [
+        'Laravel', 'React', 'Inertia', 'PHP 8.3', 'Tailwind v4',
+        'SEO technique', 'Core Web Vitals', 'Search Console', 'Schema.org', 'AdonisJS',
+    ],
+
+    'agency' => [
+        'name' => 'atcode.fr',
+        'url' => 'https://atcode.fr',
+        'eyebrow' => 'Mon agence',
+        'description' => "La structure derrière les projets : conception, développement, "
+            ."référencement et maintenance, du cadrage à la mise en production.",
+        'stats' => [
+            ['label' => 'Prestations', 'value' => 'Sites vitrines · Refonte · SEO · Logiciels sur mesure'],
+            ['label' => 'Basée en', 'value' => 'France · à distance'],
+        ],
+        'cta' => 'Voir le studio',
+    ],
+
+    // La thèse de la page : le panneau cobalt, seul moment appuyé.
+    'expertise' => [
+        'eyebrow' => 'Double expertise',
+        'title' => "Développement\n+ SEO",
+        'panel_eyebrow' => 'Ce que ça change',
+        'panel_title' => "Un site rapide\nque l'on trouve",
+        'panel_description' => "Un site rapide que personne ne trouve ne rapporte rien ; un site "
+            ."bien positionné qui rame perd ses visiteurs avant la conversion. "
+            ."Tenir les deux dans la même main, c'est ce qui transforme un budget "
+            ."technique en site rentable.",
+        'stats' => [
+            ['label' => 'Développement', 'value' => 'Laravel · React · API · Performance'],
+            ['label' => 'Référencement', 'value' => 'SEO technique · Contenu · Mesure'],
+            ['label' => 'Pour vous', 'value' => 'Un seul interlocuteur, zéro arbitrage perdu'],
+        ],
+    ],
+
+    'levers' => [
+        ['label' => 'SEO technique', 'text' => 'Indexation, rendu, maillage interne, données structurées, gestion des redirections.'],
+        ['label' => 'Performance', 'text' => "Core Web Vitals tenus dès l'écriture du code, pas rattrapés après la mise en ligne."],
+        ['label' => 'Contenu', 'text' => 'Arborescence, intentions de recherche, balisage et hiérarchie des titres.'],
+        ['label' => 'Mesure', 'text' => 'Search Console, suivi des positions et rapports lisibles par un non-technicien.'],
+    ],
+
+    // Seuils publics de Google. Ce sont des cibles, pas des mesures : ne pas
+    // les remplacer par des scores tant qu'il n'y a pas de vraie donnée.
+    'vitals' => [
+        'note' => 'Seuils « bon » de Google, visés dès la conception.',
+        'items' => [
+            ['key' => 'LCP', 'name' => 'Largest Contentful Paint', 'target' => '≤ 2,5 s'],
+            ['key' => 'INP', 'name' => 'Interaction to Next Paint', 'target' => '≤ 200 ms'],
+            ['key' => 'CLS', 'name' => 'Cumulative Layout Shift', 'target' => '≤ 0,1'],
+        ],
+    ],
+
     'projects' => [
         [
-            'tag' => 'Projet phare',
             'name' => 'Serveurly',
             'domain' => 'serveurly.com',
             'url' => 'https://serveurly.com',
-            'description' => 'La plateforme pour découvrir, voter et promouvoir les meilleurs serveurs de jeux vidéo.',
-            'cta' => 'Visiter serveurly.com',
+            'sector' => 'Gaming',
+            'state' => 'En production',
+            'description' => "La plateforme pour découvrir, voter et promouvoir les meilleurs "
+                ."serveurs de jeux vidéo. Classements temps réel, pages de serveur "
+                ."indexables, votes vérifiés.",
         ],
         [
-            'tag' => 'Portfolio',
-            'name' => 'alexistc.fr',
-            'domain' => 'alexistc.fr',
-            'url' => 'https://alexistc.fr',
-            'description' => 'Réalisations techniques, projets récents et parcours professionnel.',
-            'cta' => 'Explorer le portfolio',
+            'name' => 'Privapark',
+            'domain' => 'privapark.fr',
+            'url' => 'https://privapark.fr',
+            'sector' => 'Mobilité',
+            'state' => 'En ligne',
+            'description' => "Plateforme de stationnement privatisé et sécurisé : réservation en "
+                ."ligne, gestion des places et pages locales travaillées pour la "
+                ."recherche de proximité.",
         ],
+        [
+            'name' => "JT Parking\nBeauvais",
+            'domain' => 'jtparkingbeauvais.fr',
+            'url' => 'https://jtparkingbeauvais.fr',
+            'sector' => 'Mobilité',
+            'state' => 'En ligne',
+            'description' => "Site de réservation d'un parking à Beauvais : tarifs, disponibilités "
+                ."et prise de réservation, sur des requêtes locales à forte intention "
+                ."d'achat.",
+        ],
+    ],
+
+    'socials' => [
+        ['label' => 'LinkedIn', 'icon' => 'linkedin', 'handle' => 'adrien-chretien', 'note' => 'LinkedIn · parcours', 'url' => 'https://www.linkedin.com/in/adrien-chretien/'],
+        ['label' => 'X', 'icon' => 'x', 'handle' => '@adriench02', 'note' => 'X · notes de dev', 'url' => 'https://x.com/adriench02'],
+    ],
+
+    // Carte de contributions. Les données viennent de l'endpoint public de
+    // GitHub, rafraîchies toutes les 'cache_hours' heures. Aucun jeton requis.
+    'github' => [
+        'login' => 'Adrien222',
+        'cache_hours' => 3,
+    ],
+
+    // Balises servies côté serveur, pour que la page soit indexable sans JS.
+    'seo' => [
+        'title' => 'Adrien Chretien · Développeur full-stack & expert SEO',
+        'description' => "Développeur full-stack et référenceur. Je construis des sites qui se "
+            ."chargent vite et qui se trouvent : Laravel, React, SEO technique et "
+            ."Core Web Vitals tenus dès le code.",
+        'image' => '/img/adrien.jpg',
     ],
 
 ];
