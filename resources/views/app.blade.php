@@ -36,6 +36,10 @@
     <meta name="description" content="{{ $seo['description'] }}">
     <link rel="canonical" href="{{ $canonical }}">
 
+    {{-- Icône vectorielle : nette à toutes les tailles, et un seul fichier. --}}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ config('profile.avatar') }}">
+
     <meta property="og:type" content="profile">
     <meta property="og:title" content="{{ $seo['title'] }}">
     <meta property="og:description" content="{{ $seo['description'] }}">

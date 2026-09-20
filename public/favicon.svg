@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Adrien Chretien">
+  <rect width="64" height="64" rx="14" fill="#2438C8"/>
+  <g fill="none" stroke="#F4F1E8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 48 L32 17 L47 48"/>
+    <path d="M24 38 H40"/>
+  </g>
+</svg>
